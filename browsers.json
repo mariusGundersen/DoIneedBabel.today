@@ -1,0 +1,32 @@
+[
+  {
+    "id": "ie",
+    "name": "Internet Explorer",
+    "version": 11
+  },
+  {
+    "id": "edge",
+    "name": "Microsoft Edge",
+    "version": 14
+  },
+  {
+    "id": "firefox",
+    "name": "Mozilla Firefox",
+    "version": 49
+  },
+  {
+    "id": "chrome",
+    "name": "Google Chrome",
+    "version": 53
+  },
+  {
+    "id": "safari",
+    "name": "Safari",
+    "version": 10
+  },
+  {
+    "id": "node",
+    "name": "Node.js",
+    "version": 6.8
+  }
+]

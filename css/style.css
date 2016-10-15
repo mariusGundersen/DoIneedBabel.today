@@ -1,0 +1,24 @@
+tr.plugin-row>td{
+  background: #e11;
+  border-radius: 0;
+}
+
+tr.plugin-row:hover>td{
+  background: #A21414;
+}
+
+tr.plugin-row>td.plugin-name{
+  background: white;
+}
+
+tr.plugin-row:hover>td.plugin-name{
+  background: #ccc;
+}
+
+tr.plugin-row>td.is-supported{
+  background: #44ab44;
+}
+
+tr.plugin-row:hover>td.is-supported{
+  background: #428441;
+}
