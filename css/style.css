@@ -9,6 +9,7 @@ tr.plugin-row:hover>td{
 
 tr.plugin-row>td.plugin-name{
   background: white;
+  padding-left: 2em;
 }
 
 tr.plugin-row:hover>td.plugin-name{
@@ -20,5 +21,30 @@ tr.plugin-row>td.is-supported{
 }
 
 tr.plugin-row:hover>td.is-supported{
+  background: #428441;
+}
+
+tr.preset-row>td{
+  background: #e11;
+  border-radius: 0;
+}
+
+tr.preset-row:hover>td{
+  background: #A21414;
+}
+
+tr.preset-row>td.preset-name{
+  background: white;
+}
+
+tr.preset-row:hover>td.preset-name{
+  background: #ccc;
+}
+
+tr.preset-row>td.is-supported{
+  background: #44ab44;
+}
+
+tr.preset-row:hover>td.is-supported{
   background: #428441;
 }

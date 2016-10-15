@@ -1,8 +1,9 @@
 const fs = require('fs');
+const presets = require('./presets.json');
 const plugins = require('./plugins.json');
 const browsers = require('./browsers.json');
 
-function build(browsers, plugins){
+function build(browsers, presets){
   return `${head()}
     <table class="highlight">
       <thead>
@@ -11,9 +12,7 @@ function build(browsers, plugins){
           ${browsers.map(browser => browserCell(browser)).join('')}
         </tr>
       </thead>
-      <tbody>
-        ${entries(plugins).map(plugin => pluginRow(browsers, plugin)).join('')}
-      </tbody>
+      ${presets.map(preset => presetBody(browsers, preset)).join('')}
     </table>
   ${tail()}`;
 }
@@ -45,16 +44,38 @@ function browserCell(browser){
   return `<th data-field="${browser.id}">${browser.name} (${browser.version})</th>`;
 }
 
+function presetBody(browsers, preset){
+  return `
+    <tbody data-id="${preset.name}">
+      ${presetRow(browsers, preset)}
+      ${preset.plugins.map(plugin => pluginRow(browsers, plugin)).join('')}
+    </tbody>`;
+}
+
+function presetRow(browsers, preset){
+  return `
+    <tr class="preset-row">
+      <td class="preset-name"><a href="http://babeljs.io/docs/plugins/preset-${preset.name}">${preset.name}</a></td>
+      ${browsers.map(browser => presetCell(browser, preset.plugins)).join('')}
+    </tr>`;
+}
+
+function presetCell(browser, plugins){
+  const pluginVersions = plugins.map(plugin => plugin[browser.id] || 'Use plugin');
+  const isSupported = pluginVersions.every(pluginVersion => pluginVersion <= browser.version);
+  return `<td class="${isSupported ? 'is-supported' : ''}">${isSupported ? '' : 'Use plugin'}</td>`;
+}
+
 function pluginRow(browsers, plugin){
   return `
     <tr class="plugin-row">
-      <td class="plugin-name">${plugin.key}</td>
+      <td class="plugin-name"><a href="http://babeljs.io/docs/plugins/${plugin.key}">${plugin.key}</a></td>
       ${browsers.map(browser => pluginCell(browser, plugin.values)).join('')}
     </tr>`;
 }
 
 function pluginCell(browser, plugin){
-  const pluginVersion = plugin[browser.id] || 'Not supported';
+  const pluginVersion = plugin && plugin[browser.id] || 'Use plugin';
   const isSupported = pluginVersion <= browser.version;
   return `<td class="${isSupported ? 'is-supported' : ''}">${pluginVersion}</td>`;
 }
@@ -66,4 +87,11 @@ function entries(object){
   }));
 }
 
-console.log(build(browsers, plugins));
+function join(presets, plugins){
+  return entries(presets).map(preset => ({
+    name: preset.key,
+    plugins: preset.values.map(key => ({key: key, values: plugins[key]}))
+  }))
+}
+
+console.log(build(browsers, join(presets, plugins)));
