@@ -61,9 +61,10 @@ function presetRow(browsers, preset){
 }
 
 function presetCell(browser, plugins){
-  const pluginVersions = plugins.map(plugin => plugin[browser.id] || 'Use plugin');
-  const isSupported = pluginVersions.every(pluginVersion => pluginVersion <= browser.version);
-  return `<td class="${isSupported ? 'is-supported' : ''}">${isSupported ? '' : 'Use plugin'}</td>`;
+  const pluginVersions = plugins.map(plugin => plugin.values && plugin.values[browser.id] || 'Use plugin');
+  const supportCount = pluginVersions.filter(pluginVersion => pluginVersion <= browser.version).length;
+  const isSupported = supportCount == plugins.length;
+  return `<td class="${isSupported ? 'is-supported' : ''}">${isSupported ? 'Yes' : `Use plugin (${supportCount}/${plugins.length})`}</td>`;
 }
 
 function pluginRow(browsers, plugin){
@@ -94,4 +95,5 @@ function join(presets, plugins){
   }))
 }
 
-console.log(build(browsers, join(presets, plugins)));
+const output = build(browsers, join(presets, plugins));
+console.log(output);

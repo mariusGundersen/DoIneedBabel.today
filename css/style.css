@@ -35,6 +35,7 @@ tr.preset-row:hover>td{
 
 tr.preset-row>td.preset-name{
   background: white;
+  font-weight: bold;
 }
 
 tr.preset-row:hover>td.preset-name{
