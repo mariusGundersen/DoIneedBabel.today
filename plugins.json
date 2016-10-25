@@ -135,5 +135,7 @@
     "edge": 14,
     "firefox": 52,
     "safari": 10
+  },
+  "transform-async-generator-functions": {
   }
 }
