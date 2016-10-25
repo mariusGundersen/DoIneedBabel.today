@@ -124,10 +124,12 @@
   "transform-exponentiation-operator": {
     "chrome": 52,
     "edge": 14,
-    "firefox": 52
+    "firefox": 52,
+    "node": 7
   },
   "transform-async-to-generator": {
-    "chrome": 55
+    "chrome": 55,
+    "node": 8
   },
   "syntax-trailing-function-commas": {
     "edge": 14,
